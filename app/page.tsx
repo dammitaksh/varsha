@@ -438,20 +438,20 @@ const MedicalAppointmentApp = () => {
 
   // -------------------- Patient Booking Flow --------------------
   const renderPatientBooking = () => (
-    <div className="max-w-7xl mx-auto p-6">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
       {/* Hero Section */}
       {bookingStep === 1 && (
-        <div className="mb-12 text-center">
+        <div className="mb-8 sm:mb-12 text-center">
           <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-teal-400 to-cyan-500 rounded-full mb-4">
             <Stethoscope className="w-10 h-10 text-white" />
           </div>
-          <h1 className="text-5xl font-bold text-gray-900 mb-3">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-3">
             Book Your Appointment
           </h1>
-          <p className="text-xl text-gray-600">
+          <p className="text-lg sm:text-xl text-gray-600">
             Expert medical care at your convenience
           </p>
-          <div className="flex items-center justify-center gap-8 mt-6 text-sm text-gray-600">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 mt-6 text-xs sm:text-sm text-gray-600">
             <div className="flex items-center gap-2">
               <Check className="w-5 h-5 text-teal-500" />
               <span>Experienced Doctors</span>
@@ -475,17 +475,21 @@ const MedicalAppointmentApp = () => {
             {[1, 2, 3, 4].map((step) => (
               <div key={step} className="flex items-center">
                 <div
-                  className={`flex items-center justify-center w-12 h-12 rounded-full font-semibold transition-all ${
+                  className={`flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full font-semibold text-sm sm:text-base transition-all ${
                     bookingStep >= step
                       ? "bg-gradient-to-br from-teal-400 to-cyan-500 text-white shadow-lg"
                       : "bg-gray-200 text-gray-500"
                   }`}
                 >
-                  {bookingStep > step ? <Check className="w-6 h-6" /> : step}
+                  {bookingStep > step ? (
+                    <Check className="w-5 h-5 sm:w-6 sm:h-6" />
+                  ) : (
+                    step
+                  )}
                 </div>
                 {step < 4 && (
                   <div
-                    className={`w-20 h-1 transition-all ${
+                    className={`w-10 sm:w-20 h-1 transition-all ${
                       bookingStep > step
                         ? "bg-gradient-to-r from-teal-400 to-cyan-500"
                         : "bg-gray-200"
@@ -495,7 +499,7 @@ const MedicalAppointmentApp = () => {
               </div>
             ))}
           </div>
-          <div className="flex justify-center mt-3 space-x-14 text-sm font-medium">
+          <div className="flex justify-center mt-3 gap-2 sm:gap-6 text-xs sm:text-sm font-medium overflow-x-auto px-2">
             <span
               className={bookingStep >= 1 ? "text-teal-600" : "text-gray-500"}
             >
@@ -523,7 +527,7 @@ const MedicalAppointmentApp = () => {
       {/* Step 1: Select Service */}
       {bookingStep === 1 && (
         <div>
-          <div className="mb-8 flex items-center space-x-4">
+          <div className="mb-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
             <div className="flex-1 relative">
               <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
               <input
@@ -547,7 +551,7 @@ const MedicalAppointmentApp = () => {
             </select>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {filteredServices.map((service) => (
               <div
                 key={service.id}
@@ -695,7 +699,7 @@ const MedicalAppointmentApp = () => {
             <h3 className="font-bold text-lg mb-4 text-gray-900">
               Select Date
             </h3>
-            <div className="grid grid-cols-7 gap-3">
+            <div className="grid grid-cols-4 sm:grid-cols-7 gap-2 sm:gap-3">
               {calendarDates.map((date) => {
                 const isSelected =
                   selectedDate?.toDateString() === date.toDateString();
@@ -744,7 +748,7 @@ const MedicalAppointmentApp = () => {
               <h3 className="font-bold text-lg mb-4 text-gray-900">
                 Select Time
               </h3>
-              <div className="grid grid-cols-4 md:grid-cols-6 gap-3">
+              <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-2 sm:gap-3">
                 {availableTimeSlots.map((time) => (
                   <button
                     key={time}
@@ -998,11 +1002,13 @@ const MedicalAppointmentApp = () => {
       }, 0);
 
     return (
-      <div className="p-6 max-w-7xl mx-auto">
-        <h1 className="text-3xl font-bold mb-6">Admin Dashboard</h1>
+      <div className="px-4 sm:px-6 lg:px-8 py-4 sm:py-6 max-w-7xl mx-auto">
+        <h1 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6">
+          Admin Dashboard
+        </h1>
 
         {/* Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6 sm:mb-8">
           <div className="bg-white p-6 rounded-lg shadow">
             <div className="flex items-center justify-between mb-2">
               <h3 className="text-gray-600">Today&apos;s Appointments</h3>
@@ -1052,78 +1058,80 @@ const MedicalAppointmentApp = () => {
             </div>
           </div>
 
-          <table className="w-full text-left">
-            <thead className="bg-gray-50">
-              <tr>
-                <th className="px-6 py-3 text-xs font-semibold text-gray-600 uppercase">
-                  Patient
-                </th>
-                <th className="px-6 py-3 text-xs font-semibold text-gray-600 uppercase">
-                  Service
-                </th>
-                <th className="px-6 py-3 text-xs font-semibold text-gray-600 uppercase">
-                  Doctor
-                </th>
-                <th className="px-6 py-3 text-xs font-semibold text-gray-600 uppercase">
-                  Date
-                </th>
-                <th className="px-6 py-3 text-xs font-semibold text-gray-600 uppercase">
-                  Time
-                </th>
-                <th className="px-6 py-3 text-xs font-semibold text-gray-600 uppercase">
-                  Status
-                </th>
-                <th className="px-6 py-3 text-xs font-semibold text-gray-600 uppercase">
-                  Actions
-                </th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-gray-200">
-              {appointments.map((appt) => {
-                const svc = SERVICES.find((s) => s.id === appt.serviceId);
-                const doc = DOCTORS.find((d) => d.id === appt.doctorId);
-                return (
-                  <tr key={appt.id} className="hover:bg-gray-50">
-                    <td className="px-6 py-4">
-                      <div className="font-semibold">{appt.patientName}</div>
-                      <div className="text-sm text-gray-600">
-                        {appt.patientEmail}
-                      </div>
-                    </td>
-                    <td className="px-6 py-4">{svc?.name}</td>
-                    <td className="px-6 py-4">{doc?.name}</td>
-                    <td className="px-6 py-4">
-                      {new Date(appt.date).toLocaleDateString()}
-                    </td>
-                    <td className="px-6 py-4">{appt.time}</td>
-                    <td className="px-6 py-4">
-                      <span
-                        className={`px-3 py-1 rounded-full text-xs font-semibold ${
-                          appt.status === "confirmed"
-                            ? "bg-green-100 text-green-800"
-                            : appt.status === "cancelled"
-                            ? "bg-red-100 text-red-800"
-                            : "bg-yellow-100 text-yellow-800"
-                        }`}
-                      >
-                        {appt.status}
-                      </span>
-                    </td>
-                    <td className="px-6 py-4">
-                      {appt.status === "confirmed" && (
-                        <button
-                          onClick={() => handleCancelAppointment(appt.id)}
-                          className="text-red-600 hover:text-red-800 text-sm font-semibold"
+          <div className="overflow-x-auto">
+            <table className="w-full text-left">
+              <thead className="bg-gray-50">
+                <tr>
+                  <th className="px-6 py-3 text-xs font-semibold text-gray-600 uppercase">
+                    Patient
+                  </th>
+                  <th className="px-6 py-3 text-xs font-semibold text-gray-600 uppercase">
+                    Service
+                  </th>
+                  <th className="px-6 py-3 text-xs font-semibold text-gray-600 uppercase">
+                    Doctor
+                  </th>
+                  <th className="px-6 py-3 text-xs font-semibold text-gray-600 uppercase">
+                    Date
+                  </th>
+                  <th className="px-6 py-3 text-xs font-semibold text-gray-600 uppercase">
+                    Time
+                  </th>
+                  <th className="px-6 py-3 text-xs font-semibold text-gray-600 uppercase">
+                    Status
+                  </th>
+                  <th className="px-6 py-3 text-xs font-semibold text-gray-600 uppercase">
+                    Actions
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-200">
+                {appointments.map((appt) => {
+                  const svc = SERVICES.find((s) => s.id === appt.serviceId);
+                  const doc = DOCTORS.find((d) => d.id === appt.doctorId);
+                  return (
+                    <tr key={appt.id} className="hover:bg-gray-50">
+                      <td className="px-6 py-4">
+                        <div className="font-semibold">{appt.patientName}</div>
+                        <div className="text-sm text-gray-600">
+                          {appt.patientEmail}
+                        </div>
+                      </td>
+                      <td className="px-6 py-4">{svc?.name}</td>
+                      <td className="px-6 py-4">{doc?.name}</td>
+                      <td className="px-6 py-4">
+                        {new Date(appt.date).toLocaleDateString()}
+                      </td>
+                      <td className="px-6 py-4">{appt.time}</td>
+                      <td className="px-6 py-4">
+                        <span
+                          className={`px-3 py-1 rounded-full text-xs font-semibold ${
+                            appt.status === "confirmed"
+                              ? "bg-green-100 text-green-800"
+                              : appt.status === "cancelled"
+                              ? "bg-red-100 text-red-800"
+                              : "bg-yellow-100 text-yellow-800"
+                          }`}
                         >
-                          Cancel
-                        </button>
-                      )}
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
+                          {appt.status}
+                        </span>
+                      </td>
+                      <td className="px-6 py-4">
+                        {appt.status === "confirmed" && (
+                          <button
+                            onClick={() => handleCancelAppointment(appt.id)}
+                            className="text-red-600 hover:text-red-800 text-sm font-semibold"
+                          >
+                            Cancel
+                          </button>
+                        )}
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     );
@@ -1133,29 +1141,33 @@ const MedicalAppointmentApp = () => {
     <div className="min-h-screen bg-gray-50">
       {/* Navigation */}
       <nav className="bg-white shadow-sm border-b">
-        <div className="max-w-7xl mx-auto px-6 py-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4">
           <div className="flex items-center justify-between">
-            <h1 className="text-2xl font-bold text-teal-600">MediBook</h1>
-            <div className="flex items-center space-x-4">
+            <h1 className="text-xl sm:text-2xl font-bold text-teal-600">
+              MediBook
+            </h1>
+            <div className="flex items-center gap-2 sm:gap-4">
               <button
                 onClick={() => setCurrentView("patient")}
-                className={`px-4 py-2 rounded-lg font-semibold transition-colors ${
+                className={`px-3 sm:px-4 py-2 rounded-lg text-sm sm:text-base font-semibold transition-colors ${
                   currentView === "patient"
                     ? "bg-teal-600 text-white"
                     : "text-gray-600 hover:bg-gray-100"
                 }`}
               >
-                Patient View
+                <span className="hidden sm:inline">Patient View</span>
+                <span className="sm:hidden">Patient</span>
               </button>
               <button
                 onClick={() => setCurrentView("admin")}
-                className={`px-4 py-2 rounded-lg font-semibold transition-colors ${
+                className={`px-3 sm:px-4 py-2 rounded-lg text-sm sm:text-base font-semibold transition-colors ${
                   currentView === "admin"
                     ? "bg-teal-600 text-white"
                     : "text-gray-600 hover:bg-gray-100"
                 }`}
               >
-                Admin View
+                <span className="hidden sm:inline">Admin View</span>
+                <span className="sm:hidden">Admin</span>
               </button>
             </div>
           </div>
